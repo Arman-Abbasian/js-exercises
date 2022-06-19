@@ -1,8 +1,8 @@
 const Amar=[
-    {name:"Ali",lastName:"Kamrani",productName:"cover 405",isproduced:true,productionTime:3,productionNumber:1000,AverageProduction:250},
-    {name:"Ahmad",lastName:"Haghbin",productName:"cover 206",isproduced:true,productionTime:2,productionNumber:2000,AverageProduction:200},
-    {name:"Javid",lastName:"Ganji",productName:"cover tiba",isproduced:false,productionTime:1,productionNumber:0,AverageProduction:100},
-    {name:"Javad",lastName:"nosrati",productName:"conver pride",isproduced:true,productionTime:4,productionNumber:2000,AverageProduction:200}
+    {name:"Ali",lastName:"Kamrani",productDetails:{customerName:"PayaClutch",productName:"cover 405",productCost:"125000 R"},isproduced:true,productionTime:3,productionNumber:1000,AverageProduction:250},
+    {name:"Ahmad",lastName:"Haghbin",productDetails:{customerName:"PayaClutch",productName:"cover 206",productCost:"505000 R"},isproduced:true,productionTime:2,productionNumber:300,AverageProduction:200},
+    {name:"Javid",lastName:"Ganji",productDetails:{customerName:"PayaClutch",productName:"cover Tiba",productCost:"345000 R"},isproduced:false,productionTime:1,productionNumber:0,AverageProduction:100},
+    {name:"Javad",lastName:"nosrati",productDetails:{customerName:"PayaClutch",productName:"cover Pride",productCost:"255000 R"},isproduced:true,productionTime:4,productionNumber:1000,AverageProduction:200}
 ];
 const numberOfZarb=Amar.reduce(function(acc,item){
     return acc+item.productionNumber;
@@ -82,5 +82,35 @@ console.log(findedNumber);
 
 const findedNumberIndex=numbers.indexOf(4,3);
 console.log(findedNumberIndex)
+//filter method
+const filterdArray=numbers.filter(function(item,index,numbers){
+    const sum=numbers.reduce((acc,item)=>acc+item);
+    console.log(sum)
+    return item>(sum /5)
+})
+console.log(filterdArray)
+const isproducedItems=Amar.filter(item=>item.isproduced)
+console.log(isproducedItems);
+const personnelPerformance=isproducedItems.map((item)=>{
+    return ({name:item.name,lastName:item.lastName,performance:(((item.productionNumber / item.productionTime) / item.AverageProduction)-1)*100})
+});
+console.log(personnelPerformance);
+const totalProducts=isproducedItems.reduce((acc,item)=>{
+  return  acc+item.productionNumber
+} ,0);
+let initVal=0;
 
-
+for (const item of isproducedItems) {
+     initVal+= item.productionNumber;
+}
+isproducedItems.forEach(element => {
+    initVal+= element.productionNumber;
+});
+const totalPrice=isproducedItems.reduce((price,item)=>{
+    const pricee=parseInt(item.productDetails.productCost.split(" ")[0]);
+   return price +(pricee*item.productionNumber)
+},0)
+const price=parseInt(Amar[0].productDetails.productCost.split(" ")[0]);
+console.log(totalPrice)
+const allpositivee=Amar.some(item=>item.isproduced);
+console.log(allpositivee)
