@@ -1,0 +1,93 @@
+
+:root{
+    --primary-color:#f70776;
+    --text-color:#141010;
+    --secondary-color:#680747;
+}
+body{
+    color: var(--text-color);
+    background-color: #faf5e4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+header{
+    min-width: 100vw;
+    min-height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+.form-container{
+    display: flex;
+}
+form{
+    width: 25rem;
+    background:red;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--secondary-color);
+}
+form input{
+    flex: 1;
+}
+form input , form button{
+    border: none;
+    outline: none;
+    background-color: #faf5e4;
+    font-size: 1rem; 
+    padding: 0.5rem;
+}
+form button{
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.5s;
+    background-color: #ec729c;
+}
+form button:hover{
+    background-color: var(--secondary-color);
+    color: white;
+}
+.todo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25rem;
+    margin: 0.3rem 0;
+    border: 1px solid var(--text-color);
+    padding: 0.3rem ;
+    box-sizing: border-box;
+
+}
+.todo li{
+    flex:1;
+    color: var(--secondary-color);
+    font-weight: bold;
+    list-style-type:none;
+}
+.todo span{
+    display: block;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 0.2rem;
+}
+.fa-square-check{
+    color: rgb(23, 105, 105);
+}
+.fa-trash-can{
+    color: red;
+}
+.complete{
+    text-decoration: line-through;
+    opacity: 0.5;
+}
