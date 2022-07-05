@@ -7,11 +7,26 @@ const filterSelect=document.querySelector(".filter-todos");
 const todo=document.querySelector(".todo");
 
 addButton.addEventListener("click",addTodo);
-container.addEventListener("click",chechRemove)
+container.addEventListener("click",checkRemove)
 // deleteButton.addEventListener("click",deleteTodo);
 // checkButton.addEventListener("click",todoStatus);
 filterSelect.addEventListener("change",filterTodos);
+document.addEventListener("DOMContentLoaded",showAllTodos)
 
+function showAllTodos(){
+    const itemsJson=localStorage.getItem('todos');
+    const itemsArray=JSON.parse(itemsJson);
+    itemsArray.forEach(element => {
+        const div=document.createElement("div");
+        div.classList.add("todo");
+        const divChildren=`
+        <li>${element}</li>
+        <span><i class="fa-regular fa-square-check"></i></span>
+        <span><i class="fa-regular fa-trash-can"></i></span>`;
+        div.innerHTML=divChildren;        
+        container.appendChild(div);
+    });
+}
 function addTodo(e){
     e.preventDefault();
     let value =input.value;
@@ -25,16 +40,40 @@ function addTodo(e){
         <span><i class="fa-regular fa-trash-can"></i></span>`;
         div.innerHTML=divChildren;        
         container.appendChild(div);
+        saveLocalStorage(value);
         input.value="";
     }   
 };
+function saveLocalStorage(value){
+if(localStorage.getItem('todos')){
+    console.log("yes")
+let todosDB= localStorage.getItem('todos');
+console.log(todosDB,typeof todosDB)
+let arr=JSON.parse(todosDB);
+console.log(arr,Array.isArray(arr))
+arr.push(value);
+console.log(arr, typeof arr)
+const arrToDb=JSON.stringify(arr);
+console.log(arrToDb, typeof arrToDb)
+localStorage.setItem('todos',arrToDb);
+}else{
+    console.log("no");
+    localStorage.setItem('todos',JSON.stringify([value]));
+}
+}
 
-function chechRemove(e) {
+function checkRemove(e) {
     const classList=[...e.target.classList];
     const item=e.target.parentElement.parentElement;
+    const itemTag=item.firstElementChild.textContent;
     classList.forEach(element => {
        if (element==='fa-trash-can') {
         item.remove();
+        const todosJson=localStorage.getItem('todos');
+        const todosArray=JSON.parse(todosJson);
+        const remainedTodosArray=todosArray.filter(element=>element!==itemTag);
+        const remainedTodosJson=JSON.stringify(remainedTodosArray);
+        localStorage.setItem('todos',remainedTodosJson);
        }else if(element==='fa-square-check'){
         item.classList.toggle("complete")
        }
