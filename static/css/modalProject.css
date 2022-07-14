@@ -1,0 +1,32 @@
+body{
+    width: 100vw;
+    height: 100vh;
+}
+
+.box{
+    width: 20rem;
+    height: 10rem;
+    border: 4px solid red;
+    box-shadow: 5px 5px blue, 10px 10px red, 15px 15px green;
+    transform: translateY(-100vh);
+    transition: all;
+    transition-duration: 1s;
+    z-index: 3;
+}
+.modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: red;
+    opacity: 0.1;
+    z-index: 2;
+    display: none;
+}
+.c{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
